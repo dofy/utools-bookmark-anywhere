@@ -1,0 +1,38 @@
+{
+  "pluginName": "Bookmark Anywhere",
+  "description": "跨浏览器书签",
+  "version": "0.0.1",
+  "homepage": "https://u.tools",
+  "author": "Seven Yu",
+  "logo": "../logo.png",
+  "preload": "preload.js",
+  "platform": ["win32", "darwin"],
+  "development": {
+    "logo": "../logo.png",
+    "buildPath": "../dist"
+  },
+  "features": [
+    {
+      "code": "bookmark",
+      "explain": "书签查询",
+      "cmds": ["bookmark", "书签"]
+    },
+    {
+      "code": "add",
+      "explain": "添加书签",
+      "cmds": [
+        {
+          "type": "over",
+          "label": "添加当前浏览器地址为书签",
+          "exclude": "/^https?://[\\S]*/"
+        },
+        {
+          "type": "regex",
+          "label": "添加书签",
+          "match": "/^https?://[\\S]*/",
+          "minLength": 7
+        }
+      ]
+    }
+  ]
+}
