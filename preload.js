@@ -1,29 +1,31 @@
-utools.onPluginReady(() => {
-  console.log('-- ready')
-})
-utools.onDbPull(() => {
-  console.log('-- onDbPull')
-})
+const bookmark = require('./Bookmark')
+let bookmarks = []
 
 window.exports = {
   add: {
     mode: 'none',
     args: {
       enter({ code, type, payload }) {
-        console.log('..:: enter -> code', code)
-        console.log('..:: enter -> type', type)
-        console.log('..:: enter -> payload', payload)
-        // TODO: add bookmark
+        utools.hideMainWindow()
         let url = null
         if (payload === 'add') {
           url = utools.getCurrentBrowserUrl()
         } else {
           url = payload
         }
-        console.log('..:: enter -> url', url)
-        if (url) {
-          console.log('--- add bookmark')
+        if (url && /^https?:\/\//i.test(url)) {
+          bookmark.create(url, (err, bookmark) => {
+            if (err) {
+              utools.showNotification(err.message)
+            } else {
+              utools.db.put(bookmark)
+              utools.showNotification('😁 Bookmark saved!')
+            }
+          })
+        } else {
+          utools.showNotification('😫 There is no URL to save!')
         }
+        utools.outPlugin()
       },
     },
   },
@@ -31,23 +33,36 @@ window.exports = {
     mode: 'list',
     args: {
       enter({ code, type, payload }, callback) {
-        console.log('..:: enter -> code', code)
-        console.log('..:: enter -> type', type)
-        console.log('..:: enter -> payload', payload)
+        bookmarks = utools.db.allDocs()
+        callback(bookmarks)
       },
       search({ code, type, payload }, word, callback) {
-        console.log('..:: search -> code', code)
-        console.log('..:: search -> type', type)
-        console.log('..:: search -> payload', payload)
-        console.log('..:: search -> word', word)
+        let reg = new RegExp(word, 'i')
+        callback(
+          bookmarks.filter(item => {
+            return reg.test(item.search)
+          }),
+        )
       },
-      select({ code, type, payload }, item, callback) {
-        console.log('..:: select -> code', code)
-        console.log('..:: select -> type', type)
-        console.log('..:: select -> payload', payload)
-        console.log('..:: select -> item', item)
+      select(action, item, callback) {
+        console.log('..:: select -> action, item', action, item)
+        utools.hideMainWindow()
+        require('electron').shell.openExternal(item.url)
+        utools.outPlugin()
       },
       placeholder: '搜索书签',
+    },
+  },
+  clean: {
+    mode: 'none',
+    args: {
+      enter({ code, type, payoad }) {
+        utools.hideMainWindow()
+        utools.db.allDocs().map(item => {
+          utools.db.remove(item)
+        })
+        utools.outPlugin()
+      },
     },
   },
 }

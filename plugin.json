@@ -4,14 +4,17 @@
   "version": "0.0.1",
   "homepage": "https://u.tools",
   "author": "Seven Yu",
-  "logo": "../logo.png",
+  "logo": "logo.png",
   "preload": "preload.js",
   "platform": ["win32", "darwin"],
+  "development": {
+    "_main": "debug.html"
+  },
   "features": [
     {
       "code": "bookmark",
       "explain": "书签查询",
-      "cmds": ["bookmark", "书签"]
+      "cmds": ["bookmark", "bm", "书签"]
     },
     {
       "code": "add",
@@ -29,6 +32,11 @@
           "minLength": 7
         }
       ]
+    },
+    {
+      "code": "clean",
+      "explain": "清除所有书签",
+      "cmds": ["clean"]
     }
   ]
 }
