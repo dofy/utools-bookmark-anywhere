@@ -23,8 +23,7 @@
         {
           "type": "over",
           "label": "添加当前浏览器地址为书签",
-          "exclude": "/^https?://[\\S]*/",
-          "minLength": 10
+          "exclude": "/^https?://[\\S]*/"
         },
         {
           "type": "regex",
