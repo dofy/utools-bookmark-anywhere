@@ -36,11 +36,11 @@ window.exports = {
   bookmark: {
     mode: 'list',
     args: {
-      enter({ code, type, payload }, callback) {
-        bookmarks = utools.db.allDocs()
+      enter(action, callback) {
+        bookmarks = utools.db.allDocs().sort((x, y) => y.times - x.times)
         callback(bookmarks)
       },
-      search({ code, type, payload }, word, callback) {
+      search(action, word, callback) {
         let reg = new RegExp(word, 'i')
         callback(
           bookmarks.filter(item => {
@@ -51,6 +51,8 @@ window.exports = {
       select(action, item, callback) {
         utools.hideMainWindow()
         require('electron').shell.openExternal(item.url)
+        item.times = item.times ? item.times + 1 : 1
+        utools.db.put(item)
         utools.outPlugin()
       },
       placeholder: '搜索书签',

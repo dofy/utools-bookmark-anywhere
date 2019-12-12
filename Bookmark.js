@@ -58,6 +58,7 @@ module.exports = {
                 keywords,
                 description,
                 url,
+                times: 0,
                 search: [url, title, keywords, description].join(),
               })
             })
