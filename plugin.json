@@ -1,8 +1,8 @@
 {
   "pluginName": "Bookmark Anywhere",
   "description": "跨浏览器书签",
-  "version": "0.0.1",
-  "homepage": "https://u.tools",
+  "version": "0.1.2",
+  "homepage": "https://github.com/dofy/utools-bookmark-anywhere",
   "author": "Seven Yu",
   "logo": "logo.png",
   "preload": "preload.js",
@@ -23,13 +23,14 @@
         {
           "type": "over",
           "label": "添加当前浏览器地址为书签",
-          "exclude": "/^https?://[\\S]*/"
+          "exclude": "/^https?://[\\S]*/",
+          "minLength": 10
         },
         {
           "type": "regex",
           "label": "添加书签",
           "match": "/^https?://[\\S]*/",
-          "minLength": 7
+          "minLength": 10
         }
       ]
     },

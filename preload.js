@@ -18,6 +18,10 @@ window.exports = {
             if (err) {
               utools.showNotification(err.message)
             } else {
+              let oldData = utools.db.get(bookmark._id)
+              if (oldData) {
+                bookmark._rev = oldData._rev
+              }
               utools.db.put(bookmark)
               utools.showNotification('😁 Bookmark saved!')
             }
@@ -45,7 +49,6 @@ window.exports = {
         )
       },
       select(action, item, callback) {
-        console.log('..:: select -> action, item', action, item)
         utools.hideMainWindow()
         require('electron').shell.openExternal(item.url)
         utools.outPlugin()
