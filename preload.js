@@ -30,9 +30,9 @@ window.exports = {
   bookmark: {
     mode: 'list',
     args: {
-      enter(action, callback) {
+      enter({ payload }, callback) {
         bookmarks = utools.db.allDocs().sort((x, y) => y.times - x.times)
-        callback(bookmarks)
+        search(null, payload, callback)
       },
       select(action, item, callback) {
         utools.hideMainWindow()
