@@ -1,12 +1,12 @@
 {
   "pluginName": "Bookmark Anywhere",
   "description": "跨浏览器书签",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "homepage": "https://github.com/dofy/utools-bookmark-anywhere",
   "author": "Seven Yu",
   "logo": "logo.png",
   "preload": "preload.js",
-  "platform": ["win32", "darwin"],
+  "platform": ["win32", "darwin", "Linux"],
   "development": {
     "_main": "debug.html"
   },
@@ -14,20 +14,23 @@
     {
       "code": "bookmark",
       "explain": "书签查询",
+      "platform": ["win32", "darwin", "Linux"],
       "cmds": ["bookmark", "bm", "书签"]
     },
     {
       "code": "add",
-      "explain": "添加书签",
+      "explain": "添加当前浏览器地址为书签",
+      "platform": ["win32", "darwin"],
+      "cmds": ["add", "au", "添加"]
+    },
+    {
+      "code": "input",
+      "explain": "添加该地址为书签",
+      "platform": ["win32", "darwin", "Linux"],
       "cmds": [
         {
-          "type": "over",
-          "label": "添加当前浏览器地址为书签",
-          "exclude": "/^https?://[\\S]*/"
-        },
-        {
           "type": "regex",
-          "label": "添加书签",
+          "label": "添加该地址为书签",
           "match": "/^https?://[\\S]*/",
           "minLength": 10
         }
@@ -36,7 +39,8 @@
     {
       "code": "clean",
       "explain": "清除所有书签",
-      "cmds": ["clean"]
+      "platform": ["win32", "darwin", "Linux"],
+      "cmds": ["clean", "清除"]
     }
   ]
 }
