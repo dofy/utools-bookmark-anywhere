@@ -1,43 +1,20 @@
 const bookmark = require('./Bookmark')
 let bookmarks = []
 
-function addBookmark(url) {
-  utools.hideMainWindow()
-  if (url && /^https?:\/\//i.test(url)) {
-    bookmark.create(url, (err, bookmark) => {
-      if (err) {
-        utools.showNotification(err.message)
-      } else {
-        let oldData = utools.db.get(bookmark._id)
-        if (oldData) {
-          // * 兼容 0.1.2
-          bookmark.times = oldData.times ? oldData.times : 0
-          bookmark._rev = oldData._rev
-        }
-        utools.db.put(bookmark)
-        utools.showNotification('😁 Bookmark saved!')
-      }
-    })
-  } else {
-    utools.showNotification('😫 There is no URL to save!')
-  }
-  utools.outPlugin()
-}
-
 window.exports = {
   add: {
     mode: 'none',
     args: {
-      enter({ code, type, payload }) {
-        addBookmark(utools.getCurrentBrowserUrl())
+      enter() {
+        bookmark.add(utools.getCurrentBrowserUrl())
       },
     },
   },
   input: {
     mode: 'none',
     args: {
-      enter({ code, type, payload }) {
-        addBookmark(payload)
+      enter({ payload }) {
+        bookmark.add(payload)
       },
     },
   },
@@ -70,17 +47,15 @@ window.exports = {
   import: {
     mode: 'none',
     args: {
-      enter({ code, type, payload }) {
-        console.log('..:: enter -> payload', payload)
-        console.log('..:: enter -> type', type)
-        console.log('..:: enter -> code', code)
+      enter({ payload }) {
+        payload.map(item => bookmark.import(item.path))
       },
     },
   },
   clean: {
     mode: 'none',
     args: {
-      enter({ code, type, payload }) {
+      enter() {
         utools.hideMainWindow()
         utools.db.allDocs().map(item => {
           utools.db.remove(item)

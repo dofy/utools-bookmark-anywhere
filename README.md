@@ -6,25 +6,25 @@ uTools 跨浏览器书签管理器插件
 
 ## 支持平台
 
-- [X] macOS
-- [X] Windows
-- [X] Linux (_部分功能_)
+- [x] macOS
+- [x] Windows
+- [x] Linux (_部分功能_)
 
 ## 当前网址识别支持的浏览器
 
 - macOS 支持的浏览器
-    - Safari
-    - Chrome
-    - Opera
-    - Vivaldi
-    - Brave
+  - Safari
+  - Chrome
+  - Opera
+  - Vivaldi
+  - Brave
 - Windows 支持的浏览器
-    - Chrome
-    - Firefox
-    - MicrosoftEdge
-    - IE
-    - Opera
-    - Brave
+  - Chrome
+  - Firefox
+  - MicrosoftEdge
+  - IE
+  - Opera
+  - Brave
 - Linux 不支持
 
 详情参考： [uTools API](https://u.tools/docs/developer/api.html#getcurrentbrowserurl)
@@ -46,6 +46,10 @@ uTools 跨浏览器书签管理器插件
 ### 自动识别当前输入
 
 自动识别`剪贴板`内容，若为网址，可以添加为书签
+
+### 书签导入
+
+目前测试可导入`Chrome`、`Safari`、`Firefox`等浏览器导出的书签文件，支持多文件同时导入
 
 ## TODO
 
