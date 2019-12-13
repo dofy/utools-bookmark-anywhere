@@ -1,7 +1,7 @@
 {
   "pluginName": "Bookmark Anywhere",
   "description": "跨浏览器书签",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "homepage": "https://github.com/dofy/utools-bookmark-anywhere",
   "author": "Seven Yu",
   "logo": "logo.png",
@@ -48,6 +48,12 @@
           "match": "/\\.html$/i"
         }
       ]
+    },
+    {
+      "code": "manager",
+      "explain": "删除书签",
+      "platform": ["win32", "darwin", "Linux"],
+      "cmds": ["delete", "remove", "del", "rm", "删除"]
     },
     {
       "code": "clean",

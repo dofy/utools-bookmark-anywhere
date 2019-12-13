@@ -1,6 +1,15 @@
 const bookmark = require('./Bookmark')
 let bookmarks = []
 
+function search(action, word, callback) {
+  let reg = new RegExp(word, 'i')
+  callback(
+    bookmarks.filter(item => {
+      return reg.test(item.search)
+    }),
+  )
+}
+
 window.exports = {
   add: {
     mode: 'none',
@@ -25,14 +34,6 @@ window.exports = {
         bookmarks = utools.db.allDocs().sort((x, y) => y.times - x.times)
         callback(bookmarks)
       },
-      search(action, word, callback) {
-        let reg = new RegExp(word, 'i')
-        callback(
-          bookmarks.filter(item => {
-            return reg.test(item.search)
-          }),
-        )
-      },
       select(action, item, callback) {
         utools.hideMainWindow()
         require('electron').shell.openExternal(item.url)
@@ -41,7 +42,8 @@ window.exports = {
         utools.db.put(item)
         utools.outPlugin()
       },
-      placeholder: '搜索书签',
+      search,
+      placeholder: '搜索，在浏览器中打开书签',
     },
   },
   import: {
@@ -50,6 +52,22 @@ window.exports = {
       enter({ payload }) {
         payload.map(item => bookmark.import(item.path))
       },
+    },
+  },
+  manager: {
+    mode: 'list',
+    args: {
+      enter(action, callback) {
+        bookmarks = utools.db.allDocs().sort((x, y) => x.times - y.times)
+        callback(bookmarks)
+      },
+      select(select, item, callback) {
+        utools.hideMainWindow()
+        utools.db.remove(item)
+        utools.outPlugin()
+      },
+      search,
+      placeholder: '搜索，删除选中书签',
     },
   },
   clean: {
