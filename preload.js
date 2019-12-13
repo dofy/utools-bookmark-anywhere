@@ -67,10 +67,20 @@ window.exports = {
       placeholder: '搜索书签',
     },
   },
+  import: {
+    mode: 'none',
+    args: {
+      enter({ code, type, payload }) {
+        console.log('..:: enter -> payload', payload)
+        console.log('..:: enter -> type', type)
+        console.log('..:: enter -> code', code)
+      },
+    },
+  },
   clean: {
     mode: 'none',
     args: {
-      enter({ code, type, payoad }) {
+      enter({ code, type, payload }) {
         utools.hideMainWindow()
         utools.db.allDocs().map(item => {
           utools.db.remove(item)
