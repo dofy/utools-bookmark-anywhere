@@ -6,25 +6,25 @@ uTools 跨浏览器书签管理器插件
 
 ## 支持平台
 
-- [x] macOS
-- [x] Windows
-- [x] Linux (_部分功能_)
+- macOS
+- Windows
+- Linux (_部分功能_)
 
 ## 当前网址识别支持的浏览器
 
 - macOS 支持的浏览器
-  - Safari
-  - Chrome
-  - Opera
-  - Vivaldi
-  - Brave
+    - Safari
+    - Chrome
+    - Opera
+    - Vivaldi
+    - Brave
 - Windows 支持的浏览器
-  - Chrome
-  - Firefox
-  - MicrosoftEdge
-  - IE
-  - Opera
-  - Brave
+    - Chrome
+    - Firefox
+    - MicrosoftEdge
+    - IE
+    - Opera
+    - Brave
 - Linux 不支持
 
 详情参考： [uTools API](https://u.tools/docs/developer/api.html#getcurrentbrowserurl)
@@ -59,5 +59,5 @@ uTools 跨浏览器书签管理器插件
 
 ## TODO
 
-- [ ] 处理一些异常情况
-- [X] 书签管理
+- 处理一些异常情况
+- 书签管理
