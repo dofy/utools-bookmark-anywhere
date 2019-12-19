@@ -65,21 +65,10 @@ window.exports = {
         utools.hideMainWindow()
         utools.db.remove(item)
         utools.outPlugin()
+        utools.showNotification('🤔 Bookmark has been removed!')
       },
       search,
       placeholder: '搜索，删除选中书签',
-    },
-  },
-  clean: {
-    mode: 'none',
-    args: {
-      enter() {
-        utools.hideMainWindow()
-        utools.db.allDocs().map(item => {
-          utools.db.remove(item)
-        })
-        utools.outPlugin()
-      },
     },
   },
 }
