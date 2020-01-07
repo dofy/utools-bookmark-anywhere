@@ -2,7 +2,7 @@ const bookmark = require('./Bookmark')
 let bookmarks = []
 
 function search(action, word, callback) {
-  let reg = new RegExp(word, 'i')
+  let reg = new RegExp(word.replace(/\s+/g, '|'), 'i')
   callback(
     bookmarks.filter(item => {
       return reg.test(item.search)
