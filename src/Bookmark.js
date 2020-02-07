@@ -6,37 +6,34 @@ const CHARSET = 'utf-8'
 module.exports = {
   // 解析页面，获取书签信息
   get(url, callback) {
+    // save bookmark first
+    callback(null, {
+      _id: `bmaw::${url}`,
+      title: url,
+      keywords: url,
+      description: url,
+      url,
+      times: 0,
+      search: url,
+    })
     request(
       {
         url,
         gzip: true,
         method: 'GET',
+        timeout: 15000,
         encoding: null,
         headers: {
           'User-Agent': 'Mozilla/5.0',
         },
       },
       (error, res, rawData) => {
-        if (error) {
-          callback(error, null)
-          return
-        }
         const { statusCode } = res
         const [contentType, flag, headerCharset] = res.headers['content-type']
           .split(/;|=/)
           .map(item => item.trim().toLowerCase())
 
-        // ! force bookmark
-        if (statusCode >= 400) {
-          callback(null, {
-            _id: `bmaw::${url}`,
-            title: url,
-            keywords: url,
-            description: url,
-            url,
-            times: 0,
-            search: url,
-          })
+        if (error || statusCode >= 400) {
           return
         }
 
