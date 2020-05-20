@@ -21,7 +21,6 @@ module.exports = {
         url,
         gzip: true,
         method: 'GET',
-        timeout: 15000,
         encoding: null,
         headers: {
           'User-Agent': 'Mozilla/5.0',
