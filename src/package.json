@@ -1,6 +1,6 @@
 {
   "name": "utools-bookmark-anywhere",
-  "version": "0.2.12",
+  "version": "0.2.16",
   "description": "bookmark anywhere",
   "main": "preload.js",
   "scripts": {

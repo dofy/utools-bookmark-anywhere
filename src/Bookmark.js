@@ -31,7 +31,7 @@ module.exports = {
         const { statusCode } = res
         const [contentType, flag, headerCharset] = res.headers['content-type']
           .split(/;|=/)
-          .map(item => item.trim().toLowerCase())
+          .map((item) => item.trim().toLowerCase())
 
         if (error || statusCode >= 400) {
           return
@@ -119,7 +119,7 @@ module.exports = {
       count++
       this.add(
         linkMatch[1],
-        isOk => {
+        (isOk) => {
           isOk ? succ++ : fail++
           if ((succ + fail) % 7 === 0) {
             utools.showNotification(`👍 ${succ} / 👎 ${fail} / 👊 ${count}`)
