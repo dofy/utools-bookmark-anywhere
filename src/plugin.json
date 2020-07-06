@@ -16,7 +16,9 @@
       "explain": "搜索书签",
       "platform": ["win32", "darwin", "Linux"],
       "cmds": [
-        "bookmark", "bm", "书签",
+        "bookmark",
+        "bm",
+        "书签",
         {
           "type": "over",
           "label": "在书签中搜索"
