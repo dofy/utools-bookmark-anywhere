@@ -48,8 +48,8 @@ module.exports = {
         charset = charsetMatch1
           ? charsetMatch1[1].toLowerCase()
           : charsetMatch2
-          ? charsetMatch2[1].toLowerCase()
-          : charset
+            ? charsetMatch2[1].toLowerCase()
+            : charset
 
         if (charset !== CHARSET) {
           testString = iconv.decode(rawData, charset)
